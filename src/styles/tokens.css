@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Temporary Latin handwriting face until Providence Sans Pro is cleared for web use. */
+@font-face {
+  font-family: 'Gaegu';
+  src: url('/fonts/gaegu-latin-700-normal.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-text: 'Glacial Indifference', system-ui, sans-serif;
+  --font-hand: 'Gaegu', 'Segoe Print', 'Bradley Hand', cursive;
+  --color-paper: #fff;
+  --color-ink: #000;
+  --color-pink: #fe49a4;
+  --color-lime: #c5da48;
+  --color-matte: #949494;
+  --color-canvas: #606060;
+  --color-muted-pink: #932d5f;
+  --color-muted-olive: #697b20;
+  --color-line: rgb(255 255 255 / 38%);
+  --color-translucent: rgb(0 0 0 / 25%);
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --content-width: 75rem;
+  --header-height: 4.5rem;
+  --section-space: clamp(4rem, 9vw, 8rem);
+  --title-size: clamp(2.75rem, 6vw, 5.75rem);
+  --duration-quick: 180ms;
+}

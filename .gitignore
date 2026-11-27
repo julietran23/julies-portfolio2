@@ -1,0 +1,25 @@
+# Dependencies and generated files
+/node_modules/
+/dist/
+/dist-ssr/
+/coverage/
+*.tsbuildinfo
+*.local
+*.log
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Private reference materials and working files
+/attachments/
+/references/
+/source-assets/
+/work/
+*.zip
+*.pdf
