@@ -3,7 +3,7 @@ import { Link, useOutletContext } from 'react-router';
 
 import { HomeBackdrop } from '../components/HomeBackdrop';
 import { Landing } from '../components/Landing';
-import type { LandingIntro } from '../hooks/useLandingIntro';
+import type { HomeOutletContext } from '../components/SiteLayout';
 import { projectPath, projects } from '../data/projects';
 
 const interests = [
@@ -14,11 +14,16 @@ const interests = [
 ];
 
 export function HomePage() {
-  const intro = useOutletContext<LandingIntro>();
+  const { intro, homeScroll } = useOutletContext<HomeOutletContext>();
 
   return (
     <div className="homepage">
-      <HomeBackdrop introProgress={intro.progress} reducedMotion={intro.reducedMotion} />
+      <HomeBackdrop
+        introProgress={intro.progress}
+        reducedMotion={intro.reducedMotion}
+        landingHeight={homeScroll.landingHeight}
+        scrollDepth={homeScroll.scrollDepth}
+      />
       <Landing {...intro} />
       <div className="home-sections">
         <section

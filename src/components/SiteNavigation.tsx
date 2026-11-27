@@ -1,4 +1,6 @@
 import { ChevronDown, Menu, X } from 'lucide-react';
+import { motion } from 'motion/react';
+import type { MotionStyle, MotionValue } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Link, useLocation } from 'react-router';
@@ -9,11 +11,12 @@ import { useNavigationVisibility } from '../hooks/useNavigationVisibility';
 
 interface SiteNavigationProps {
   onHome: () => void;
+  themeProgress: MotionValue<number>;
 }
 
 const projectMenuId = 'selected-work-projects';
 
-export function SiteNavigation({ onHome }: SiteNavigationProps) {
+export function SiteNavigation({ onHome, themeProgress }: SiteNavigationProps) {
   const { key, pathname } = useLocation();
   const { isHidden, reveal } = useNavigationVisibility();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -22,6 +25,9 @@ export function SiteNavigation({ onHome }: SiteNavigationProps) {
   const menuToggle = useRef<HTMLButtonElement>(null);
   const projectControls = useRef<HTMLDivElement>(null);
   const projectsToggle = useRef<HTMLButtonElement>(null);
+  const themeStyle: MotionStyle & { '--home-nav-theme': MotionValue<number> } = {
+    '--home-nav-theme': themeProgress,
+  };
 
   useEffect(() => {
     setMenuOpen(false);
@@ -61,9 +67,10 @@ export function SiteNavigation({ onHome }: SiteNavigationProps) {
   }
 
   return (
-    <header
+    <motion.header
       ref={header}
       className="site-header"
+      style={themeStyle}
       data-hidden={isHidden}
       data-menu-open={isMenuOpen}
       data-projects-open={areProjectsOpen}
@@ -92,6 +99,7 @@ export function SiteNavigation({ onHome }: SiteNavigationProps) {
           className="nav-toggle"
           type="button"
           ref={menuToggle}
+          aria-label="Menu"
           aria-controls="primary-navigation"
           aria-expanded={isMenuOpen}
           onClick={() => {
@@ -100,7 +108,7 @@ export function SiteNavigation({ onHome }: SiteNavigationProps) {
           }}
         >
           {isMenuOpen ? <X size={17} aria-hidden="true" /> : <Menu size={17} aria-hidden="true" />}
-          Menu
+          <span>Menu</span>
         </button>
         <nav id="primary-navigation" className="site-nav" aria-label="Primary">
           {sections.map(({ id, label }) => {
@@ -155,6 +163,6 @@ export function SiteNavigation({ onHome }: SiteNavigationProps) {
           })}
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 }

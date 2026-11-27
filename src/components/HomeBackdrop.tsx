@@ -1,6 +1,7 @@
-import { motion, useMotionValue, useScroll, useTransform } from 'motion/react';
+import { motion, useTransform } from 'motion/react';
 import type { MotionValue } from 'motion/react';
-import { useLayoutEffect } from 'react';
+
+import type { HomeScroll } from '../hooks/useHomeScroll';
 
 interface HomeBackdropProps {
   introProgress: MotionValue<number>;
@@ -77,23 +78,12 @@ function BackdropGlow({ color, scrollDepth, introProgress, reducedMotion }: Back
   return <motion.div className={`home-backdrop__glow home-backdrop__glow--${color}`} style={{ transform, opacity }} />;
 }
 
-export function HomeBackdrop({ introProgress, reducedMotion }: HomeBackdropProps) {
-  const { scrollY } = useScroll();
-  const landingHeight = useMotionValue(window.innerHeight);
-
-  useLayoutEffect(() => {
-    const landing = document.getElementById('home');
-    if (!landing) return;
-
-    const measure = () => landingHeight.set(landing.offsetHeight);
-    measure();
-
-    const observer = new ResizeObserver(measure);
-    observer.observe(landing);
-    return () => observer.disconnect();
-  }, [landingHeight]);
-
-  const scrollDepth = useTransform(() => scrollY.get() / Math.max(landingHeight.get(), 1));
+export function HomeBackdrop({
+  introProgress,
+  reducedMotion,
+  landingHeight,
+  scrollDepth,
+}: HomeBackdropProps & Pick<HomeScroll, 'landingHeight' | 'scrollDepth'>) {
   const shadeTransform = useTransform(() => {
     const depth = Math.min(1, Math.max(0, scrollDepth.get()));
     // Match the landing's lower edge so the shade is fully present under work content.

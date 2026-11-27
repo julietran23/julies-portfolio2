@@ -3,11 +3,19 @@ import type { MotionStyle, MotionValue } from 'motion/react';
 import { useLayoutEffect } from 'react';
 import { Outlet, ScrollRestoration, useLocation, useMatches } from 'react-router';
 
+import { useHomeScroll } from '../hooks/useHomeScroll';
+import type { HomeScroll } from '../hooks/useHomeScroll';
 import { useLandingIntro } from '../hooks/useLandingIntro';
+import type { LandingIntro } from '../hooks/useLandingIntro';
 import { SiteNavigation } from './SiteNavigation';
 
 interface RouteDetails {
   title: string;
+}
+
+export interface HomeOutletContext {
+  intro: LandingIntro;
+  homeScroll: HomeScroll;
 }
 
 export function SiteLayout() {
@@ -18,6 +26,12 @@ export function SiteLayout() {
   const { pathname, hash } = useLocation();
   const isHomePage = pathname === '/';
   const intro = useLandingIntro(isHomePage, isHomePage && (!hash || hash === '#home'));
+  const homeScroll = useHomeScroll(isHomePage);
+  const navTheme = useTransform(
+    homeScroll.sectionProgress,
+    [0, 0.06, 0.5, 0.56, 0.84, 1],
+    [0, 0.03, 0.03, 0.18, 0.5, 1],
+  );
   const navOpacity = useTransform(intro.reveal, [0.25, 0.86], [0, 1]);
   const navPointerEvents = useTransform(intro.reveal, (value) => value >= 0.35 ? 'auto' : 'none');
   const style: MotionStyle & {
@@ -37,12 +51,12 @@ export function SiteLayout() {
     <motion.div
       className="site-shell"
       data-homepage={isHomePage}
-      style={isHomePage ? style : undefined}
+      style={style}
     >
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <SiteNavigation onHome={intro.replay} />
+      <SiteNavigation onHome={intro.replay} themeProgress={navTheme} />
       <main id="main-content" tabIndex={-1}>
-        <Outlet context={intro} />
+        <Outlet context={{ intro, homeScroll } satisfies HomeOutletContext} />
       </main>
       <ScrollRestoration />
     </motion.div>

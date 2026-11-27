@@ -17,7 +17,7 @@ Phase 2 completed on November 27, 2026. The animated landing is ready for Julie�
 - Stable homepage anchors are `#home`, `#selected-work`, `#about-me`, and `#skills`. Project slugs and route titles come from the shared project model. React Router manages browser history and scroll restoration. A production host will need an HTML fallback for application routes.
 - The landing uses one sequence for the one-second blackout fade, five-second hold, and 1.2-second rearrangement. Two persistent text elements and two persistent gradient shapes move between the measured Canva positions. The wide final view preserves the reference crop, and narrow views keep the full greeting in frame. The original character is isolated as a vector from slide 2.
 - Selected Work uses five direct project links plus a decorative arc. About Me reserves a portrait frame, and Skills uses a simple badge shape.
-- A shared fixed backdrop uses the reference glow colors and an advancing shade. The matte gray is darker than the reference sample for light text contrast. The tinted navigation surface stays to the right and leaves the left-hand greeting unobscured.
+- A shared fixed backdrop uses the reference glow colors and an advancing shade. The matte gray is darker than the reference sample for light text contrast. The Phase 2 navigation refinement links a full-width surface to that scroll position. The landing tint is light and unblurred, and the charcoal surface reaches 18px blur by Selected Work. Project pages start in charcoal. The surface and links hide together, with a compact Menu trigger on touch layouts.
 - Glacial Indifference ships as original local OTF files with the SIL Open Font License. Temporary Gaegu Bold ships as Latin WOFF2 with its license. The Phase 2 upload is the Office Bold cut, with publisher permission for web use and Git distribution still unverified.
 - Original design and image materials stay in private working storage. The public asset set uses the isolated character, the existing favicon, and licensed fonts.
 
@@ -36,6 +36,15 @@ Phase 2 completed on November 27, 2026. The animated landing is ready for Julie�
 - All 13 final Chromium check groups passed with zero console, runtime, or resource errors. They covered repeated Home replay and cancellation, cross-route Home, direct anchors, history and project returns, keyboard skip, scrolling during the intro, navigation visibility, disclosure dismissal and focus, touch, and reduced motion. A 17-point pixel check confirmed a gradual background transition and continued color changes in lower sections.
 - Captured the initial and final landing compositions, open navigation, transition into Selected Work, and mobile landing. At 1440×810, measured placement edges were within 0.3% of the reference frame except for the lower edge of the Gaegu “Hello...” lettering in the final state, which was 0.9% higher. Sampled pink, lime, and white colors were within two levels per RGB channel. Visible work-heading rows maintained at least 5.49:1 sampled white-text contrast across the five sizes.
 - The main visual differences are Gaegu’s glyph shapes, the required top-right navigation and short-lived skip control, the complete greeting on narrow displays, and the darker reading area behind the work placeholders.
+
+## Phase 2 adaptive navigation
+
+The navigation keeps the existing layout and interactions. Scroll progress blends the tint and blur in either direction, and the text and icons change polarity at a neutral shade that supports both. A local white wash protects contrast when the landing artwork passes behind the controls. The existing introduction source was carried forward from the Phase 2 commit. That commit contains the earlier fade, hold, and rearrangement sequence. The separately described three-second intro, two-second hold, return, and character replay are absent from this branch.
+
+- `npm ci`, strict TypeScript checking, and the production build passed.
+- All six Chromium navigation check groups passed with zero browser errors. Verification covered the landing, the forward and reverse scroll transition, all three lower homepage sections, all five project routes, direct links and settled reloads, unchanged visible navigation dimensions, keyboard, touch, dropdowns, and Home replay.
+- A project entered during the intro used the dark theme on its first rendered frame at 1440px and 390px. Background samples beneath the controls measured at least 4.54:1 at 27 positions across seven viewport sizes, including the transition through the neutral shade.
+- A stress test that changed the URL fragment and immediately reloaded reproduced an existing scroll-restoration race on the original Phase 2 build. Direct entry in a fresh tab and in-app links followed by a settled reload passed.
 
 ## Open items
 

@@ -14,24 +14,46 @@
 }
 
 .site-header {
+  --nav-theme: 1;
+  --nav-reveal-opacity: 1;
+  --nav-reveal-pointer-events: auto;
   --nav-offset: 0px;
   --nav-content-opacity: 1;
-  --nav-pointer-events: var(--intro-nav-pointer-events, auto);
-  --nav-surface: rgb(255 250 253 / 76%);
-  --nav-panel: rgb(255 250 253 / 95%);
-  --nav-panel-line: rgb(0 0 0 / 8%);
+  --nav-pointer-events: var(--nav-reveal-pointer-events);
+  --nav-light-amount: clamp(0%, calc((var(--nav-theme) - 0.03) / 0.15 * 100%), 100%);
+  --nav-neutral-amount: clamp(0%, calc((var(--nav-theme) - 0.18) / 0.32 * 100%), 100%);
+  --nav-dark-amount: clamp(0%, calc((var(--nav-theme) - 0.5) * 200%), 100%);
+  --nav-blur: calc(max(0, var(--nav-theme) - 0.03) / 0.97 * 18px);
+  --nav-light-surface: color-mix(in srgb, rgb(255 255 255 / 10%), rgb(255 255 255 / 52%) var(--nav-light-amount));
+  --nav-neutral: #757575;
+  --nav-transition-surface: color-mix(in srgb, var(--nav-light-surface), var(--nav-neutral) var(--nav-neutral-amount));
+  --nav-surface: color-mix(in srgb, var(--nav-transition-surface), rgb(22 22 22 / 60%) var(--nav-dark-amount));
+  --nav-light-panel: color-mix(in srgb, rgb(255 255 255 / 98%), var(--nav-neutral) var(--nav-neutral-amount));
+  --nav-panel: color-mix(in srgb, var(--nav-light-panel), rgb(22 22 22 / 96%) var(--nav-dark-amount));
+  --nav-panel-line: color-mix(in srgb, currentColor 12%, transparent);
+  /* Switch ink at the neutral shade, where both black and white meet 4.5:1. */
+  --nav-white-ink: round(down, min(calc(var(--nav-theme) * 200%), 100%), 100%);
   position: fixed;
   z-index: 4;
   inset: 0 0 auto;
-  color: var(--color-ink);
-  opacity: var(--intro-nav-opacity, 1);
+  color: color-mix(in srgb, var(--color-ink), var(--color-paper) var(--nav-white-ink));
+  opacity: var(--nav-reveal-opacity);
   pointer-events: none;
+}
+
+.site-shell[data-homepage='true'] .site-header {
+  --nav-theme: var(--home-nav-theme, 0);
+  --nav-reveal-opacity: var(--intro-nav-opacity, 1);
+  --nav-reveal-pointer-events: var(--intro-nav-pointer-events, auto);
 }
 
 .site-header[data-hidden='true']:not([data-menu-open='true'], [data-projects-open='true'], :has(:focus-visible)) {
   --nav-offset: calc(-1 * var(--header-height));
   --nav-content-opacity: 0;
   --nav-pointer-events: none;
+  --nav-toggle-width: 2.75rem;
+  --nav-toggle-label: none;
+  --nav-toggle-background: var(--nav-panel);
 }
 
 .site-header__inner {
@@ -58,19 +80,25 @@
   align-items: center;
   gap: clamp(0.75rem, 2.7vw, 2.75rem);
   font-size: 1rem;
-  opacity: var(--nav-content-opacity);
   pointer-events: var(--nav-pointer-events);
+}
+
+.site-header::before,
+.site-nav {
+  opacity: var(--nav-content-opacity);
   transform: translateY(var(--nav-offset));
   transition:
     transform var(--duration-quick) ease-out,
     opacity var(--duration-quick) ease-out;
 }
 
-.site-nav::before {
+.site-header::before {
   position: absolute;
   z-index: -1;
-  inset: 0 -0.75rem;
+  inset: 0;
   background: var(--nav-surface);
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  backdrop-filter: blur(var(--nav-blur));
   content: '';
   pointer-events: none;
 }
@@ -137,6 +165,16 @@
   outline-offset: -4px;
 }
 
+@media (max-aspect-ratio: 3 / 2), (max-width: 90rem) {
+  .site-header::before {
+    /* Keep ink legible when the greeting can scroll beneath the controls. */
+    --nav-wash: calc(min(1, var(--nav-theme) / 0.03) * (100% - var(--nav-light-amount)) * 0.46);
+    background:
+      linear-gradient(90deg, transparent, rgb(255 255 255 / var(--nav-wash)) 36%),
+      var(--nav-surface);
+  }
+}
+
 @media (max-width: 42rem), (pointer: coarse) {
   :root {
     --header-height: 3.25rem;
@@ -145,16 +183,22 @@
   .nav-toggle {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.375rem;
+    width: var(--nav-toggle-width, auto);
     min-height: 2.75rem;
     padding: 0.25rem 0.5rem;
     border: 0;
     border-radius: 0.25rem;
     color: inherit;
-    background: var(--nav-surface);
+    background: var(--nav-toggle-background, transparent);
     font-size: 1rem;
     cursor: pointer;
-    pointer-events: var(--intro-nav-pointer-events, auto);
+    pointer-events: var(--nav-reveal-pointer-events);
+  }
+
+  .nav-toggle span {
+    display: var(--nav-toggle-label, inline);
   }
 
   .site-nav {
@@ -171,10 +215,6 @@
     overflow: auto;
     border: 1px solid var(--nav-panel-line);
     background: var(--nav-panel);
-  }
-
-  .site-nav::before {
-    display: none;
   }
 
   .site-header[data-menu-open='true'] .site-nav {
