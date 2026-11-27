@@ -1,52 +1,10 @@
-.landing {
-  display: grid;
-  align-items: center;
-  min-height: calc(100svh - var(--header-height));
-  padding: 2rem var(--page-gutter) 5rem;
-  background:
-    radial-gradient(
-      ellipse min(33vw, 31rem) min(45vw, 27rem) at 38% 49%,
-      var(--color-pink),
-      color-mix(in srgb, var(--color-pink) 70%, transparent) 39%,
-      transparent 76%
-    ),
-    radial-gradient(
-      ellipse min(35vw, 32rem) min(45vw, 27rem) at 63% 63%,
-      var(--color-lime),
-      color-mix(in srgb, var(--color-lime) 65%, transparent) 39%,
-      transparent 79%
-    ),
-    var(--color-paper);
+.homepage {
+  position: relative;
+  isolation: isolate;
 }
 
-.landing__greeting {
-  width: min(100%, 48rem);
-  margin-inline: auto;
-  font-family: var(--font-hand);
-  font-size: clamp(4.7rem, 13vw, 11rem);
-  font-weight: 700;
-  line-height: 0.9;
-}
-
-.landing__greeting span {
-  display: block;
-}
-
-.landing__greeting span:last-child {
-  padding-top: 0.15em;
-  margin-inline-start: 49%;
-  font-size: 0.42em;
-  white-space: nowrap;
-}
-
-.home-canvas {
+.home-sections {
   color: var(--color-paper);
-  background:
-    radial-gradient(ellipse 56rem 41rem at 0 9rem, var(--color-muted-pink), transparent 85%),
-    radial-gradient(ellipse 58rem 36rem at 45% 18rem, var(--color-muted-olive), transparent 85%),
-    radial-gradient(ellipse 47rem 42rem at 81% 72%, var(--color-muted-pink), transparent 83%),
-    radial-gradient(ellipse 55rem 39rem at 9% 95%, var(--color-muted-olive), transparent 85%),
-    var(--color-canvas);
 }
 
 .home-section {
@@ -206,15 +164,6 @@
 }
 
 @media (max-width: 48rem) {
-  .landing {
-    background-size: 142% 100%, 142% 100%, auto;
-    background-position: center;
-  }
-
-  .landing__greeting span:last-child {
-    margin-inline-start: 41%;
-  }
-
   .work-section::before {
     opacity: 0.4;
   }

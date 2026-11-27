@@ -7,31 +7,39 @@
 | `Over here... (1).pdf` | `references/` | 21-slide Canva design and copy reference. See [design specification](design-spec.md) and [portfolio copy](project-content.md). |
 | `glacial-indifference.zip` | `source-assets/fonts/` | Original Glacial Indifference Regular and Bold files and OFL license. |
 | `providence-sans-regular.zip` | `source-assets/fonts/` | Reference for the supplied legacy Providence face and its actual distribution terms. |
+| `OnlineWebFonts_COM_d3dcfdd32127af14727c9c04fae86d52.zip` | `source-assets/fonts/` | Third-party Providence Sans Office Bold kit evaluated during Phase 2. |
 | `AboutMe_Images.zip` | `source-assets/about/` | Seven portrait-oriented candidates for the About Me 3D photo carousel. |
 | `Senior_Capstone_Images.zip` | `source-assets/senior-capstone/` | Five candidates for the capstone gallery and supporting case study photography. |
 | `SimV_Assets.zip` | `source-assets/simventions/` | Three candidates for the SimVentions Mission Support gallery. |
 
-These are suggested locations if the attachments need to be copied into a local checkout. The originals and slide renders stay in untracked working storage. Phase 1 ships the approved font files under `public/fonts/`. Future approved, optimized images belong under `public/images/`.
+These are suggested locations if the attachments need to be copied into a local checkout. The originals and slide renders stay in untracked working storage. Approved local fonts live under `public/fonts/` and approved web artwork under `public/images/`.
 
 ## Fonts
 
-| Supplied member | Embedded family and style | Format | Phase 1 status |
+| Supplied member | Embedded family and style | Format | Status |
 | --- | --- | --- | --- |
 | `GlacialIndifference-Regular.otf` | Glacial Indifference Regular, 400 | OpenType CFF | Embedded locally as `public/fonts/GlacialIndifference-Regular.otf`. The Canva PDF also identifies Glacial Indifference Regular. |
 | `GlacialIndifference-Bold.otf` | Glacial Indifference Bold, 700 | OpenType CFF | Embedded locally as `public/fonts/GlacialIndifference-Bold.otf`. |
 | `SIL Open Font License.txt` | SIL Open Font License 1.1 | Text | Shipped as `public/fonts/GlacialIndifference-OFL.txt` with the copyright and reserved-name notice from the font metadata. |
 | `Providence Sans Regular/Providence Sans Regular.otf` | Providence, style Sans, PostScript name `Providence-Sans`, weight class 500 | OpenType CFF | Private. The Canva PDF embeds `ProvidenceSansPro-Bold` and `ProvidenceSansPro`. The supplied legacy face has a different font identity, and the archive provides no web distribution license. |
 | `Providence Sans Regular/readme.html` | Download-site redirect template | HTML | Private. It contains no web embedding or redistribution grant. |
+| `Providence Sans Offc W00 Bold/` in the OnlineWebFonts ZIP | `ProvidenceSansOffcW00-Bold`, version 7.504, weight 700. The TTF, WOFF, and WOFF2 name records identify Guy Jeffrey Nelson and FSI FontShop International (2009) and reference a FontFont EULA. | TrueType, WOFF, WOFF2, EOT, SVG | Private. The Office edition differs from `ProvidenceSansPro-Bold`, the face embedded in both landing slides. |
 
 Glacial Indifference may be bundled and served under OFL 1.1 with its notice and license. The font metadata reserves the name Glacial Indifference. Both files are the supplied, unchanged OpenType originals. The archive contains no WOFF2, and a trial conversion changed an OpenType header flag in addition to the checksum. [SIL Open Font License FAQ, section 2](https://openfontlicense.org/ofl-faq/)
 
-Handwritten text temporarily uses Gaegu Bold 700. The Latin WOFF2 (`public/fonts/gaegu-latin-700-normal.woff2`) and its OFL 1.1 notice (`public/fonts/Gaegu-OFL.txt`) are unchanged copies from `@fontsource/gaegu` version 5.3.0. [Fontsource Gaegu distribution](https://www.npmjs.com/package/@fontsource/gaegu/v/5.3.0)
+The OnlineWebFonts ZIP includes a generic CC BY 4.0 attribution notice that also cautions some downloads require a separate embedding license. The listing for this specific file provides no license details. A font-specific web-use grant from the publisher and terms permitting repository distribution were unavailable. The kit stays in private storage. [Third-party file listing](https://www.onlinewebfonts.com/download/f36a026fd7fae583b3e2bb8a56584207) [FontFont family and licensing](https://www.myfonts.com/collections/ff-providence-sans-font-fontfont)
 
-Replace the temporary face when the matching Providence Sans Pro webfonts and the required website and repository distribution terms are available. Fonts embedded as subsets in the PDF stay in the reference document. The PDF also contains Inter 18pt Regular and Bold and Anton Regular in some mockup text. [FontFont’s FF Providence Sans family](https://www.myfonts.com/collections/ff-providence-sans-font-fontfont)
+Handwritten text in Phase 2 continues to use Gaegu Bold 700 temporarily. The Latin WOFF2 (`public/fonts/gaegu-latin-700-normal.woff2`) and its OFL 1.1 notice (`public/fonts/Gaegu-OFL.txt`) are unchanged copies from `@fontsource/gaegu` version 5.3.0. Its letterforms differ from the Canva font. [Fontsource Gaegu distribution](https://www.npmjs.com/package/@fontsource/gaegu/v/5.3.0)
+
+Replace the temporary face when matching Providence Sans Pro webfonts and the applicable licenses are available. If a future license permits website use only, supply the asset privately to the build or hosting environment. Fonts embedded as subsets in the PDF stay in the reference document. The PDF also contains Inter 18pt Regular and Bold and Anton Regular in some mockup text. [Official webfont license terms](https://www.myfonts.com/pages/license-agreement?id=eula_2277)
+
+## Landing artwork
+
+`public/images/landing-character.svg` contains the six vector paths for the hand-drawn character isolated from slide 2 of the supplied Canva PDF. The SVG preserves the black outline and white interior on a transparent background. The lettering and gradients remain separate page elements. The original PDF stays in private storage.
 
 ## Photograph inventory
 
-Dimensions below are pixels after applying the original EXIF orientation. Each file remains private in Phase 1. Gallery captions and alt text should be checked against the selected image before publishing.
+Dimensions below are pixels after applying the original EXIF orientation. Each file remains private. Gallery captions and alt text should be checked against the selected image before publishing.
 
 | Archive member | Display dimensions | Intended use or reference match |
 | --- | --- | --- |
@@ -57,7 +65,6 @@ The photo archives include no stated image license or publication approval. Befo
 
 | Location | Available material or gap | Treatment |
 | --- | --- | --- |
-| Slides 1–2, landing | Hand-drawn character is visible in the Canva reference. A standalone original is absent from the attachments. | Phase 1 uses the static greeting. For the intro phase, use the standalone illustration if available or recreate approved artwork as an SVG. |
 | Slide 8, Skills | The PDF contains the badge portrait, lanyard artwork, and organization logos. Standalone approved versions and final skills copy are pending. | Keep an empty badge/lanyard structure. Confirm future artwork and copy before adding them. |
 | Slide 9, About Me | The reference shows a sample placeholder image and shadow. Seven photographs are supplied separately. | Use the supplied portraits once approved for the carousel. |
 | Slides 11 and 14, Senior Capstone | The old salon website screenshot, team sketch, alternate group photo, and channel overlay appear only in the PDF. | Use approved archive photos where they fit. Keep a documented placeholder for any necessary illustration or screenshot until a publishable source is available. Keep the internal channel view private. |

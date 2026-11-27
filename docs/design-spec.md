@@ -4,7 +4,7 @@
 
 This site is a continuously scrolling portfolio for Julie Tran at the intersection of IT, software development, design, and multimedia. The visual language mixes editorial type, hand-lettering, warm personal details, and sparse compositions against a continuous gradient canvas. The Canva export “Over here...” supplies the visual compositions and copy. It uses a 1440 × 810 design canvas. Adapt the relationships between the elements to the browser window and reproduce the compositions with live HTML, CSS, SVG, type, and approved individual assets.
 
-Phase 1 establishes the section order, direct project routes, static placeholder compositions, shared design tokens, and motion preferences. The landing animation, scroll-responsive background, project wheel, route transitions, photo carousel, full case studies, and final Skills content belong to later phases. Use [project-content.md](project-content.md) for source wording and [asset-inventory.md](asset-inventory.md) for asset availability and publication status.
+The first two phases establish the section order, direct project routes, shared design tokens, animated landing, global navigation, and continuous scroll-responsive backdrop. Selected Work, About Me, Skills, and the case studies keep their interim content and layouts until their implementation phases. Use [project-content.md](project-content.md) for source wording and [asset-inventory.md](asset-inventory.md) for asset availability and publication status.
 
 ### Canva slide map
 
@@ -45,7 +45,7 @@ White on the sampled matte gray measures about 3:1. Use accessible darker compos
 ### Typography
 
 - Use Glacial Indifference for the editorial hierarchy, navigation, case study titles, body text, and descriptions.
-- Use FF Providence Sans for greetings, the character caption, wheel numbers and project labels, personal asides, and numbered section labels. The Canva export primarily uses ProvidenceSansPro-Bold with some ProvidenceSansPro regular. Phase 1 uses Gaegu Bold as a temporary handwritten font while the matching Providence webfonts and website distribution terms are pending. See the asset inventory for licensing.
+- Use FF Providence Sans for greetings, the character caption, wheel numbers and project labels, personal asides, and numbered section labels. The Canva export primarily uses ProvidenceSansPro-Bold with some ProvidenceSansPro regular. The site uses Gaegu Bold as the temporary handwriting face. The supplied Providence Office Bold files are a separate cut, and the archive does not supply a verified publisher grant for web use and repository distribution. See the asset inventory for licensing.
 - The export also contains Inter and Anton for some source details. Glacial Indifference and the approved handwriting treatment are the website type hierarchy. The badge’s condensed name treatment is part of its future visual review.
 - Keep large headings light and open. Use a compact handwritten treatment for labels and allow long project names to wrap. Keep sustained body copy in readable columns with a comfortable line height.
 
@@ -53,25 +53,27 @@ White on the sampled matte gray measures about 3:1. Use accessible darker compos
 
 Keep the homepage in this order with stable anchors: Home (`/` or `#home`), Selected Work (`#selected-work`), About Me (`#about-me`), and Skills (`#skills`). The four sections share one continuous document and natural browser scrolling.
 
-Use a single global navigation with links to those four destinations. Place a subtly tinted translucent bar at the top. Selecting a section opens the matching homepage anchor from any project page. In Phase 2, add a separately operable dropdown control for the five project links beside the Selected Work section link. Use semantic links and a disclosure button with an expanded state. Support keyboard and touch, dismissal on Escape and outside interaction, and sensible focus when the disclosure closes.
+The shared fixed navigation aligns at the upper right. The tinted surface stays beneath its links and leaves the final greeting clear. Home, Selected Work, About Me, and Skills are standard links. Selected Work has a separate disclosure button for the five project routes. Touch and narrow layouts keep a Menu control available at the top and place the project links inside that disclosure.
 
-In Phase 2, smoothly hide the navigation during downward scrolling and reveal it when scrolling upward, when the pointer approaches the top, or when its controls receive focus. Keep it visible while its disclosure is open. Upward scrolling or a visible touch affordance should restore it on touch devices. Allow focus to reveal the bar when a keyboard visitor tabs to its controls. Leave the target heading clear of the bar when scrolling to an anchor.
+The navigation fades in during the landing reveal. Afterward, downward scrolling hides the links and upward scrolling reveals them. Moving a mouse into the top 26 CSS pixels also reveals them. Keyboard-visible focus and open disclosures keep navigation accessible. Escape closes the innermost disclosure and returns focus to its button. Outside pointer interaction closes the disclosure. Section links keep the existing anchor and history behavior, with space beneath the fixed navigation.
 
-Every explicit Home activation scrolls to the top and starts one fresh introduction, including from a case study. Other anchor actions and browser history restoration preserve the established scene. Clear or cancel any current intro sequence before starting another. Keep ordinary Back and Forward history and direct deep links usable.
+Explicit Home activation from the link scrolls to the top and starts one fresh introduction, including from a project route. Each new Home request cancels its predecessor. Opening a direct section URL or returning through browser history keeps that destination. Selecting a section or scrolling to the top leaves the current introduction state in place. From a project, a section link returns to the requested anchor. The project dropdown uses the existing independent case-study routes.
 
 ### Shared scrolling canvas
 
-Phase 2 introduces one background layer shared by homepage sections. Start with a white field and two bright glows. Derive the position, size, opacity, brightness, and saturation of the glows and the base color from common scroll progress. Transition into the darker gray, magenta, and olive composition by Selected Work, then drift subtly through About Me and Skills. Coordinate the text color with the surface color at the corresponding scroll position.
+One fixed backdrop sits behind the homepage. Two circular CSS glows reproduce sampled radial color and alpha profiles from the Canva states. The opening animation and scroll effects change their transforms and opacity on the same elements. Their centers and diameters follow the Canva proportions at 16:9, with nearby positions adjusted for the portrait greeting.
 
-Keep interpolation continuous at section joins and the document scroll natural. Use CSS custom properties or motion values to update the backdrop with minimal layout work. Keep any work tied to scroll off the main React render path where practical. Reduced motion uses stable readable states with gentle or instant transitions. Project pages use their own gradient layer positioned on the page so it moves with the content.
+Scroll distance is normalized to the measured landing height. A soft shade advances from the lower landing edge and darkens the bright gradients to muted pink, olive, and gray. It reaches its text-safe density where Selected Work begins and deepens slightly farther down the document. The glow centers, sizes, and intensity continue drifting across the placeholder sections. The components use Motion values so scrolling updates visual properties without rendering the page every frame. Scroll remains natural.
+
+Reduced motion settles the greeting and holds the glow geometry while the section colors change with document position. Project pages keep their independent gradient backgrounds.
 
 ### Animated landing · Phase 2
 
-- Set the landing to at least the viewport height, allowing for mobile browser chrome. Start in pure black, fade to the slide 1 composition over about 1 second, then hold the composition for 5 seconds after the fade ends.
-- In slide 1, the pink glow sits left of center with the large handwritten “Hello...” across it. Place “I’m Julie!” lower and to the right over the yellow-green glow. The character begins as a tiny lower-right detail or is visually absent where the available illustration calls for it.
-- Over about 1.2 seconds, move and scale the same greetings, glows, and character toward their slide 2 positions. The large “Hello...” crosses the top-left frame boundary on the desktop reference, and “I’m Julie!” sits closer to the upper middle. The pink glow reaches the upper-left edge while the greener glow grows to its right. Preserve the full accessible greeting even where a decorative portion is visually clipped.
-- Bring the black line character into view at the lower-right next to “Over here...”. Keep this final state visible. Maintain the character as an independent asset so it can scale and anchor correctly across viewports. Use the approved original illustration or its documented placeholder.
-- An explicit skip control settles the scene in its final state. Scrolling and navigating should remain available throughout. New Home requests cancel and restart the sequence so timers cannot overlap. Show the final composition immediately under reduced motion.
+- The landing occupies `100svh`. A black document startup color and a black layer over the live scene give way to slide 1 in one second. The scene holds for five seconds from the end of the fade. The same text, glows, and character scale and translate into the second composition over 1.2 seconds.
+- Slide 1 uses black “Hello...” and “I'm Julie!” over the centered pink and yellow-green glows with the tiny reference character at the lower right. At 1440×810, the source hello ink begins at approximately 24% from the left and 38% from the top. The name begins at approximately 53% and 63%. Live Gaegu text is sized against those ink bounds. The narrower apostrophe in Gaegu preserves the word spacing. Glyph shapes still differ from Providence Sans Pro.
+- The second state moves the greeting and glows up and left. On wide screens, the left portion of “Hello...” crosses the edge as in the reference. The full greeting stays in the accessible heading. Narrow or tall screens keep the full word in view and adapt text spacing and art size to the viewport. Both states share the same DOM elements.
+- The recovered character vector grows from the small lower-right position. “Over here...” appears next to it during the rearrangement. The settled state remains visible.
+- A discreet “Skip intro” control appears during playback near the lower-left edge. It ends playback, keeps the final scene, and moves focus to the greeting. The scene can be scrolled at any time. Reduced motion displays the final state immediately.
 
 ### Selected Work · Phase 3
 

@@ -38,7 +38,7 @@
   --color-translucent: rgb(0 0 0 / 25%);
   --page-gutter: clamp(1.25rem, 5vw, 5rem);
   --content-width: 75rem;
-  --header-height: 4.5rem;
+  --header-height: 3.5rem;
   --section-space: clamp(4rem, 9vw, 8rem);
   --title-size: clamp(2.75rem, 6vw, 5.75rem);
   --duration-quick: 180ms;

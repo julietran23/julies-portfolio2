@@ -1,0 +1,75 @@
+.home-backdrop {
+  --glow-reference-size: min(100vw, 177.7778svh);
+
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-paper);
+  pointer-events: none;
+}
+
+.home-backdrop__glow {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: var(--glow-reference-size);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  will-change: transform, opacity;
+}
+
+/* Stops sampled from the pink glow's alpha falloff in the Canva reference. */
+.home-backdrop__glow--pink {
+  background: radial-gradient(
+    circle closest-side,
+    rgb(254 51 151 / 89%),
+    rgb(254 51 151 / 85%) 12%,
+    rgb(254 51 151 / 74%) 24%,
+    rgb(254 51 151 / 60%) 36%,
+    rgb(254 51 151 / 43%) 48%,
+    rgb(254 51 151 / 27%) 60%,
+    rgb(254 51 151 / 14%) 72%,
+    rgb(254 51 151 / 5.5%) 84%,
+    rgb(254 51 151 / 0%) 100%
+  );
+}
+
+.home-backdrop__glow--lime {
+  background: radial-gradient(
+    circle closest-side,
+    rgb(178 210 53),
+    rgb(190 215 45 / 86%) 14%,
+    rgb(201 219 37 / 72%) 28%,
+    rgb(213 224 29 / 58%) 42%,
+    rgb(224 229 21 / 44%) 56%,
+    rgb(232 232 16 / 34.5%) 65.4%,
+    rgb(242 236 9 / 19%) 81%,
+    rgb(255 242 0 / 0%) 100%
+  );
+}
+
+.home-backdrop__shade {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100% + 40svh);
+  background: linear-gradient(to bottom, transparent, var(--color-ink) 40svh);
+  will-change: transform, opacity;
+}
+
+@media (max-aspect-ratio: 3 / 2) {
+  .home-backdrop__glow--pink {
+    --glow-initial-shift-x: 6vw;
+    --glow-initial-shift-y: -7svh;
+  }
+
+  .home-backdrop__glow--lime {
+    --glow-initial-shift-y: -8svh;
+  }
+}
+
+@media (max-aspect-ratio: 5 / 4) {
+  .home-backdrop {
+    --glow-reference-size: min(151vw, 114svh);
+  }
+}

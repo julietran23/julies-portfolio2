@@ -1,6 +1,9 @@
 import { ImageIcon } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, useOutletContext } from 'react-router';
 
+import { HomeBackdrop } from '../components/HomeBackdrop';
+import { Landing } from '../components/Landing';
+import type { LandingIntro } from '../hooks/useLandingIntro';
 import { projectPath, projects } from '../data/projects';
 
 const interests = [
@@ -11,15 +14,13 @@ const interests = [
 ];
 
 export function HomePage() {
+  const intro = useOutletContext<LandingIntro>();
+
   return (
-    <>
-      <section id="home" className="landing" aria-labelledby="landing-title">
-        <h1 id="landing-title" className="landing__greeting">
-          <span>Hello...</span>
-          <span>I’m Julie!</span>
-        </h1>
-      </section>
-      <div className="home-canvas">
+    <div className="homepage">
+      <HomeBackdrop introProgress={intro.progress} reducedMotion={intro.reducedMotion} />
+      <Landing {...intro} />
+      <div className="home-sections">
         <section
           id="selected-work"
           className="home-section work-section"
@@ -68,6 +69,6 @@ export function HomePage() {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }

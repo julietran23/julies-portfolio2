@@ -8,6 +8,8 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/navigation.css';
 import './styles/home.css';
+import './styles/home-backdrop.css';
+import './styles/landing.css';
 import './styles/project.css';
 
 const root = document.getElementById('root');

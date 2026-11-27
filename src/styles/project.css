@@ -1,6 +1,7 @@
 .project-page {
-  min-height: calc(100svh - var(--header-height));
-  padding-block: clamp(2.75rem, 7vw, 6rem);
+  --project-padding: clamp(2.75rem, 7vw, 6rem);
+  min-height: 100svh;
+  padding-block: calc(var(--header-height) + var(--project-padding)) var(--project-padding);
   color: var(--color-paper);
   background:
     radial-gradient(ellipse 65rem 45rem at 0 0, var(--color-muted-pink), transparent 86%),
